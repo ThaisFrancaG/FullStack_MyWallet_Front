@@ -18,8 +18,15 @@ export default function DisplaySignUp() {
     alert("Fuichamado!!");
     event.preventDefault();
     if (!email || !password) {
-      alert("Por favor, preencha todos os campos!");
+      return alert("Por favor, preencha todos os campos!");
     }
+    if (name.length < 3) {
+      return alert("Por favor, crie um nome com mais de três dígitos");
+    }
+    if (password.length < 6) {
+      return alert("A senha deve ter, no mínimo, seis dígitos!");
+    }
+    console.log("Chegou na requisição, ó");
     const req = axios.post("http://localhost:5000/signup", {
       name: name,
       email: email,
@@ -32,6 +39,7 @@ export default function DisplaySignUp() {
     });
     req.catch((error) => {
       console.log(error);
+      alert(error.response.data);
     });
   }
   return (
