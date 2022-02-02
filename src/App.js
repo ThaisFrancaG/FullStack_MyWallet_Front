@@ -11,8 +11,8 @@ export default function App() {
       <UserContext.Provider value={{ userInfo, setUserInfo }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={DisplayLogin}></Route>
-            <Route path="/cadastro" element={DisplaySignUp}></Route>
+            <Route path="/" element={<DisplayLogin />}></Route>
+            <Route path="/cadastro" element={<DisplaySignUp />}></Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
