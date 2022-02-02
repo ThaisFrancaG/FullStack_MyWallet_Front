@@ -3,6 +3,9 @@ import { useState } from "react";
 import { UserContext } from "./context/userContext";
 import DisplayLogin from "./components/loginSignUp/DisplayLogin";
 import DisplaySignUp from "./components/loginSignUp/DisplaySignUp";
+import DisplayBalance from "./components/BalanceScreen/DisplayBalance";
+import DisplayIncome from "./components/InsOuts/DisplayIncome";
+import DisplayExpense from "./components/InsOuts/DisplayExpense";
 export default function App() {
   const [userInfo, setUserInfo] = useState({});
 
@@ -13,6 +16,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<DisplayLogin />}></Route>
             <Route path="/cadastro" element={<DisplaySignUp />}></Route>
+            <Route path="/inicio" element={<DisplayBalance />}>
+              <Route path="/entrada" element={<DisplayIncome />}></Route>
+              <Route path="/entrada" element={<DisplayExpense />}></Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

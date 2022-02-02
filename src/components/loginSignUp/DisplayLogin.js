@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ScreenGeneral } from "./StyledLogSignUp";
+import { ScreenGeneral, ErrorMessage } from "../Styles/StyledForms";
 import axios from "axios";
 
 export default function DisplayLogin() {
@@ -12,6 +12,8 @@ export default function DisplayLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonMessage, setButtonMessage] = useState("Entrar");
+  const [errorSignUp, setErrorSignUp] = useState("");
+  const [errorCheck, setErrorCheck] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,7 +21,9 @@ export default function DisplayLogin() {
     alert("Fuichamado!!");
     event.preventDefault();
     if (!email || !password) {
-      alert("Por favor, preencha todos os campos!");
+      setErrorCheck(true);
+      setErrorSignUp("Por favor, preencha todos os campos!");
+      return;
     }
     const req = axios.post("http://localhost:5000/login", {
       email: email,
@@ -48,6 +52,7 @@ export default function DisplayLogin() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <ErrorMessage backError={errorCheck}>{errorSignUp}</ErrorMessage>
         <button type="submit">{buttonMessage}</button>
       </form>
       <Link to={"/cadastro"}>

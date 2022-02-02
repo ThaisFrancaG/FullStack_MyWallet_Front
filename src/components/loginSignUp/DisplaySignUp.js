@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ScreenGeneral, ErrorMessage } from "./StyledLogSignUp";
+import { ScreenGeneral, ErrorMessage } from "../Styles/StyledForms";
 import axios from "axios";
 
 export default function DisplaySignUp() {
