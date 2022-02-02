@@ -53,3 +53,6 @@ export const ScreenGeneral = styled.div`
     color: #ffffff;
   }
 `;
+export const ErrorMessage = styled.span`
+  display: ${(props) => (props.backError ? "inline" : "none")};
+`;

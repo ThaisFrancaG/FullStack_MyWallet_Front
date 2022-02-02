@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ScreenGeneral } from "./StyledLogSignUp";
+import { ScreenGeneral, ErrorMessage } from "./StyledLogSignUp";
 import axios from "axios";
 
 export default function DisplaySignUp() {
@@ -11,6 +11,8 @@ export default function DisplaySignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const [buttonMessage, setButtonMessage] = useState("Cadastrar");
+  const [errorSignUp, setErrorSignUp] = useState("");
+  const [errorCheck, setErrorCheck] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,13 +20,19 @@ export default function DisplaySignUp() {
     alert("Fuichamado!!");
     event.preventDefault();
     if (!email || !password) {
-      return alert("Por favor, preencha todos os campos!");
+      setErrorCheck(true);
+      setErrorSignUp("Por favor, preencha todos os campos!");
+      return;
     }
     if (name.length < 3) {
-      return alert("Por favor, crie um nome com mais de três dígitos");
+      setErrorCheck(true);
+      setErrorSignUp("Por favor, crie um nome com mais de três dígitos");
+      return alert;
     }
     if (password.length < 6) {
-      return alert("A senha deve ter, no mínimo, seis dígitos!");
+      setErrorCheck(true);
+      setErrorSignUp("A senha deve ter, no mínimo, seis dígitos!");
+      return;
     }
     console.log("Chegou na requisição, ó");
     const req = axios.post("http://localhost:5000/signup", {
@@ -35,11 +43,14 @@ export default function DisplaySignUp() {
     });
     req.then((res) => {
       console.log(res);
+      setErrorCheck(false);
+      setErrorSignUp("");
       navigate("/inicio");
     });
     req.catch((error) => {
       console.log(error);
-      alert(error.response.data);
+      setErrorCheck(true);
+      setErrorSignUp(error.response.data);
     });
   }
   return (
@@ -50,18 +61,31 @@ export default function DisplaySignUp() {
           type="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onInvalid={(e) =>
+            e.target.setCustomValidity("Por favor, preencha com um nome válido")
+          }
         />
         <input
           placeholder="E-mail"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(
+              "Por favor, preencha com um email válido!"
+            )
+          }
         />
         <input
           placeholder="Senha"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(
+              "Por favor, utilize formato válido. A senha deve ter no mínimo 6 carácteres e um número!"
+            )
+          }
         />
         <input
           placeholder="Confirme a senha"
@@ -69,6 +93,7 @@ export default function DisplaySignUp() {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
+        <ErrorMessage backError={errorCheck}>{errorSignUp}</ErrorMessage>
         <button type="submit">{buttonMessage}</button>
       </form>
       <Link to={"/"}>
