@@ -45,7 +45,7 @@ export default function DisplaySignUp() {
       console.log(res);
       setErrorCheck(false);
       setErrorSignUp("");
-      navigate("/inicio");
+      navigate("/");
     });
     req.catch((error) => {
       console.log(error);

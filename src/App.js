@@ -7,7 +7,7 @@ import DisplayBalance from "./components/BalanceScreen/DisplayBalance";
 import DisplayIncome from "./components/InsOuts/DisplayIncome";
 import DisplayExpense from "./components/InsOuts/DisplayExpense";
 export default function App() {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState("");
 
   return (
     <div>
@@ -16,10 +16,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<DisplayLogin />}></Route>
             <Route path="/cadastro" element={<DisplaySignUp />}></Route>
-            <Route path="/inicio" element={<DisplayBalance />}>
-              <Route path="/entrada" element={<DisplayIncome />}></Route>
-              <Route path="/entrada" element={<DisplayExpense />}></Route>
-            </Route>
+            <Route path="/inicio" element={<DisplayBalance />}></Route>
+            <Route path="/entrada" element={<DisplayIncome />}></Route>
+            <Route path="/saida" element={<DisplayExpense />}></Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

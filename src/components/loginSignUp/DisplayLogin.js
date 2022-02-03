@@ -6,7 +6,7 @@ import { ScreenGeneral, ErrorMessage } from "../Styles/StyledForms";
 import axios from "axios";
 
 export default function DisplayLogin() {
-  const { userInfo, setUserInfo } = useContext(UserContext);
+  const { setUserInfo } = useContext(UserContext);
   //quando usa o context, tem que lembrar de chamar ele como constante onde for ser utilizado
 
   const [email, setEmail] = useState("");
@@ -30,13 +30,17 @@ export default function DisplayLogin() {
       password: password,
     });
     req.then((res) => {
-      console.log(res);
-      navigate("/cadastro");
+      setUserInfo(res.data);
+      setErrorCheck(false);
+      setErrorSignUp("");
+      navigate("/inicio");
     });
     req.catch((error) => {
-      console.log(error);
+      setErrorCheck(true);
+      setErrorSignUp(error.response.data);
     });
   }
+
   return (
     <ScreenGeneral>
       <form onSubmit={sendLogin}>

@@ -11,7 +11,7 @@ export const MainScreen = styled.main`
 
   background-color: #8c11be;
 `;
-export const TelaPrincipal = styled.div`
+export const BalanceScreen = styled.div`
   width: 80vw;
   height: 100vh;
 
