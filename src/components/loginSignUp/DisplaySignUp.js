@@ -17,7 +17,6 @@ export default function DisplaySignUp() {
   const navigate = useNavigate();
 
   function sendSignUp(event) {
-    alert("Fuichamado!!");
     event.preventDefault();
     if (!email || !password) {
       setErrorCheck(true);
@@ -27,7 +26,7 @@ export default function DisplaySignUp() {
     if (name.length < 3) {
       setErrorCheck(true);
       setErrorSignUp("Por favor, crie um nome com mais de três dígitos");
-      return alert;
+      return;
     }
     if (password.length < 6) {
       setErrorCheck(true);
@@ -35,12 +34,15 @@ export default function DisplaySignUp() {
       return;
     }
     console.log("Chegou na requisição, ó");
-    const req = axios.post("http://localhost:5000/signup", {
-      name: name,
-      email: email,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
-    });
+    const req = axios.post(
+      "  https://back-my-wallet-tfrancag.herokuapp.com/signup",
+      {
+        name: name,
+        email: email,
+        password: password,
+        passwordConfirmation: passwordConfirmation,
+      }
+    );
     req.then((res) => {
       console.log(res);
       setErrorCheck(false);

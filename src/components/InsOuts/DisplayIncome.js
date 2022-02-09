@@ -17,17 +17,19 @@ export default function DisplayIncome() {
   console.log(userInfo);
 
   function sendIncome(event) {
-    alert("Fuichamado!!");
     event.preventDefault();
     if (!incomeValue || !incomeDetail) {
       setErrorCheck(true);
       setErrorSignUp("Por favor, preencha todos os campos!");
       return;
     }
-    const req = axios.post("http://localhost:5000/incomeOperations", {
-      value: incomeValue,
-      detail: incomeDetail,
-    });
+    const req = axios.post(
+      "https://back-my-wallet-tfrancag.herokuapp.com/incomeOperations",
+      {
+        value: incomeValue,
+        detail: incomeDetail,
+      }
+    );
     req.then((res) => {
       console.log(res);
       setErrorCheck(false);

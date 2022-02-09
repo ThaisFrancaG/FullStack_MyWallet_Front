@@ -18,17 +18,19 @@ export default function DisplayLogin() {
   const navigate = useNavigate();
 
   function sendLogin(event) {
-    alert("Fuichamado!!");
     event.preventDefault();
     if (!email || !password) {
       setErrorCheck(true);
       setErrorSignUp("Por favor, preencha todos os campos!");
       return;
     }
-    const req = axios.post("http://localhost:5000/login", {
-      email: email,
-      password: password,
-    });
+    const req = axios.post(
+      "  https://back-my-wallet-tfrancag.herokuapp.com/login",
+      {
+        email: email,
+        password: password,
+      }
+    );
     req.then((res) => {
       setUserInfo(res.data);
       setErrorCheck(false);
